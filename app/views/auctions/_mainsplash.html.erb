@@ -1,0 +1,142 @@
+<div id='promo-slideshow'>
+  <div class='wrapper clearfix'>
+    <div id='slideshow-content'>
+     <% if logged_in? %>
+       <div class="featured" style="display:block; background-image:url(#{@featured.image_url});">
+        <h2><%# @featured.name %> </h2>
+        <p><%# @featured.description %> </p>
+        
+         <%# link_to "Learn More", @featured.auction, :class => "button" %>
+         <div class="tips">
+           <h2>How to Win on FirstBargain.com</h2>
+           <p>For tips & tricks:</p>
+           <%= link_to "Learn More", tips_path, :class => "button" %>
+         </div>
+       <div class="referral">
+         
+         <h2>Earn 20 Bids For Free!</h2>
+         <p> Tell your friends about FirstBargain and receive 20 FREE Bonus Bids! 
+         If your friend signs up and makes a purchase, we’ll credit your account with 20 Bonus Bids. It’s that easy!</p>
+         <%= link_to "Invite Friends", invitations_path, :class=>"button" %>
+       </div>
+       
+       
+       <div class="facebook">
+         <h2>Follow us on Facebook</h2>
+         <p>
+           Stay in the loop. You’ll find coupon codes, giveaways, and other great rewards.
+         </p>
+         
+         <%= link_to "Our Facebook Page", "http://www.facebook.com/FirstBargain", :rel => "nofollow", :class => "button" %>
+       </div>
+       
+          <% else %>
+          <div class="how-to" style="display:block;">
+            <h2>
+              How Does FirstBargain Work?
+            </h2>
+            
+          </div>
+        <h3>Register & Buy Bids</h3>
+        <p> Buy bids for $0.75 each to participate in auctions.</p>
+           <h3>Choose an Auction</h3>
+           <p>Pick from HDTV's, iPads, handbags & more.</p>
+           <h3>Bid to Win!</h3>
+           <p>Bid on an auction, last bidder when timer hits zero WINS!</p>
+           <p class="explanation">Registration is FREE & easy</p>
+           <%= link_to "Get Started", new_account_path, :class => "button" %>
+         
+           <div class="featured" style="background-image:url(#{@featured.image_url});">
+           <h2><%# @featured.name %></h2>
+           <p><%# @featured.description %></p>
+           <%# link_to "Learn More", @featured.auction, :class => "button" %>
+           
+         </div>
+         
+         <div class="bargains">
+           
+         </div>
+    </div>
+    <% end %>
+    <div id='slideshow-navigation'>
+      <ul>
+        <% if logged_in? %>
+        <li class="featured">
+          <div class="first current">
+            <span>Featured Auction</span>
+          </div>
+          <li class="tips">
+            <div>
+              <span>
+                Tips for Success
+              </span>
+            </div>
+            <li ="referral">
+              <div>
+                <span>Earn 20 Free Bids</span>
+              </div>
+            </li>
+            <li class="facebook">
+              <div>Follow us on Facebook</div>
+            </li>
+          </li>
+          
+        </li>
+        <% else %>
+        <li class="how-to">
+          <div class="first current">
+            <span>
+              How It Works
+            </span>
+          </div>
+        </li>
+        <li class="featured">
+          <div>
+            <span>
+              Featured Auction
+            </span>
+          </div>
+        </li>
+        <li class="bargains">
+          <div>
+            <span>
+              Best Bargains
+            </span>
+          </div>
+          
+        </li>
+        <% end %>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+  $("#slideshow-navigation li").click(function() {
+    var navClass = $(this).attr('class');
+    var slideNav = $("#slideshow-navigation ul").children();
+    var slideContents = $("#slideshow-content").children();
+  
+    $(this).children(":first").addClass("current");
+    $("#slideshow-content ." + navClass).show();
+  
+    $.each(slideNav, function() {
+      var navClassOthers = $(this).attr("class");
+      if (navClassOthers != navClass) {
+        $(this).children(":first").removeClass("current");
+      }
+    });
+    $.each(slideContents, function() {
+      var contentClass = $(this).attr("class");
+      if (contentClass != navClass) {
+        $(this).hide();
+      }
+    });
+  });
+</script>
+
+
+
+
+  
+   

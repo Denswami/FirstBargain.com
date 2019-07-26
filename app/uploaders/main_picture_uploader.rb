@@ -2,7 +2,7 @@
 
 class MainPictureUploader < CarrierWave::Uploader::Base
   
-  include CarrierWave::ImageScience
+  include CarrierWave::MiniMagick
   include CarrierWave::Compatibility::Paperclip
   
   storage :file
@@ -12,19 +12,19 @@ class MainPictureUploader < CarrierWave::Uploader::Base
   #end
 
   version :thumb do
-    process :resize_to_fit => [70, 65]
+    process :resize_to_fill => [70, 65]
   end
   
   version :small do
-    process :resize_to_fit => [120, 110]
+    process :resize_to_fill => [120, 110]
   end
   
   version :medium do
-    process :resize_to_fit => [280, 260]
+    process :resize_to_fill => [280, 260]
   end
   
   version :index do
-    process :resize_to_fit => [220, 204]
+    process :resize_to_fill => [220, 204]
   end
     
   def extension_white_list

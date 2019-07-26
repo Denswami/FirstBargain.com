@@ -7,7 +7,7 @@ FirstBargain::Application.configure do
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
-  config.whiny_nils = true
+  config.whiny_nils = false
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -20,13 +20,12 @@ FirstBargain::Application.configure do
 
   config.active_support.deprecation = :stderr
 
-  config.action_mailer.default_url_options = {host: "firstbargain.dev"}
+  config.action_mailer.default_url_options = {host: "localhost:3000"}
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-  SslRequirement.disable_ssl_check = true
-
+  #SslRequirement.disable_ssl_check = true
   config.paypal = ActiveMerchant::Billing::PaypalExpressGateway.new(test: true, login: "LOGIN@example.com", password: "PASSWORD", signature: "SIGNATURE")
 
 end

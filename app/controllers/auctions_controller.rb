@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class AuctionsController < ApplicationController
   set_tab :auctions, :except => :winners
   set_tab :winners, only: :winners
@@ -6,7 +7,8 @@ class AuctionsController < ApplicationController
 
   def index
     @auctions = Auction.homepage(current_user, cookies[:categories]).paginate(page: params[:page], per_page: 16)
-    @featured = FeaturedAuction.last
+   # @auctions= Auction.all
+    @featured = FeaturedAuction.first
     @winners = Bid.winners(@auctions)
     respond_with @auctions
   end

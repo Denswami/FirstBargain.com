@@ -1,0 +1,33 @@
+<% content_for :extra_headers do %>
+ <script>
+    
+    var SOURCE = "homepage";
+    poller(#{auction_ids(@auctions)}, false, #{auction_prices @auctions});
+
+
+  </script>
+<% end %>
+<% @auctions = Auction.homepage(current_user, cookies[:categories]).paginate(page: params[:page], per_page: 16)
+   # @auctions= Auction.all
+    @featured = FeaturedAuction.first
+    @winners = Bid.winners(@auctions)
+    #respond_with @auctions %>
+<%= render 'mainsplash' %>
+<div id="auctions-index">
+  <div class="block-first">
+    <h2 class="ending-soon">
+      Ending soon! Bid now!
+    </h2>
+    <table id="main-auctions">
+      <tr>
+        <%= render @auctions %>
+        <%= fill_grid @auctions, "auction", 4 %>
+      </tr>
+    </table>
+    <%= pagination @auctions %>
+  </div>
+</div>
+<%= render 'auction-overlays' %>
+<!-- Yahoo! remarketing pixel
+-->
+<% # %img(src="http://ads.bluelithium.com/pixel?id=1052429&t=2" width="1" height="1") %>

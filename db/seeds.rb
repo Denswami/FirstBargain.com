@@ -5,4 +5,15 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+Factory :account
+Factory :auction
 Factory :featured_auction
+Factory :product
+Factory :category
+Factory :order
+Factory :bid_order
+Factory :auction_order
+Factory :contact
+Factory :investment
+Factory :bid
+Factory :bid_bot

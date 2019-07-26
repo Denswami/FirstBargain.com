@@ -6,7 +6,7 @@ Factory.define :account do |f|
   f.sequence(:username) { |n| "foo#{n}" }   
   f.sequence(:email) { |n| "foo#{n}@example.com" } 
   f.birth_date {20.years.ago}
-  f.password 'foobar'
+  f.password 'foobardenswamiisere'
   f.password_confirmation {|u| u.password} 
   f.sequence(:registration_ip) { |n| "127.0.0.#{n}"}
   f.current_login_ip {|u| u.registration_ip}
@@ -65,6 +65,7 @@ Factory.define :order do |f|
   f.billing_state "Florida"
   f.billing_zip "33027"
   f.billing_phone "607-351-4028"
+  f.buyable_id "1"
   f.shipping_name {|o| o.billing_name}
   f.shipping_address {|o| o.billing_address}
   f.shipping_address_2 {|o| o.billing_address_2}

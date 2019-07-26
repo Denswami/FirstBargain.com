@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'layouts/meta' %>
+    <%= render 'layouts/og' %>
+    <%= include_stylesheets :base %>
+    <%= javascript_include_tag :cdn %>
+    <%= include_javascripts :base %>
+    <%= csrf_meta_tag %>
+    <script>
+      
+      var USER_LOGIN = #{user_login};
+      var USER_ID = #{user_id};
+
+    </script>
+    <%= yield :extra_headers %>
+    <%= load_affiliate_stylesheet %>
+    <%= render 'layouts/ie' %>
+  </head>
+  <body>
+    <div id="xhr-status">
+      <p class="warning">Please check your Internet connection.</p>
+      <p>Your computer is taking too long to get auction updates.</p>
+    </div>
+    <div id="bid-status"></div>
+    <% if logged_in? %>
+      <div id="user-credits-main">
+        <ul>
+          <li>
+            <div>
+              <span class="latency conn-good hasTooltip" title="Your internet connection is good"></span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <span class="label">Bid Credits: </span>
+              <strong class="credits-count">
+                <%= current_user.credits %>
+              </strong>
+              <%= image_tag "labels/bid-credits.png" %>
+            </div>
+          </li>
+          <li>
+            <div>
+              <span class="label">Bonus Bids:</span>
+              <strong class="bonuses-count">
+                <%= current_user.bonuses %>
+              </strong>
+              <%= image_tag "labels/bonus-credits.png" %>
+            </div>
+          </li>
+          <li class="last">
+            <div>
+              <span class="buy-bids">
+                <%= link_to "Buy Bids", bids_path, :class => "button" %>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+    <div id="main-wrapper">
+      <div id="container">
+        <%= render 'layouts/header' %>
+        <div class="padded" id="content">
+          <% if notice %>
+            <p class="notice">
+              <%= notice %>
+            </p>
+          <% elsif alert %>
+            <p class="alert">
+              <%= alert %>
+            </p>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
+      <div id="container-bottom"></div>
+    </div>
+    <%= render 'layouts/footer' %>
+    <%= render 'layouts/msc' %>
+  </body>
+</html>

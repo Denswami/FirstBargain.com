@@ -7,7 +7,7 @@ FirstBargain::Application.routes.draw do
   
   post "orders/ccbill" => "ccbill#create"
 
-  resources :auctions, only: [:index, :show] do
+   resources :auctions, only: [:index, :show] do
     resources :bids, only: :create
     resource :bid_bot, only: :create
     get :winners, on: :collection

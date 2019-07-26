@@ -1,10 +1,9 @@
 module AuctionsHelper
-
   def fb_share_auction_description(auction)
     "#{auction.product.name} going at #{number_to_currency auction.going_price} and will end in #{time_ago_in_words auction.ending_at}. Bid now and save big!"
   end
 
-  def auction_ids(*auctions)
+  def auction_ids(auctions)
     auctions.flatten.map {|a| a.id}.to_json
   end
   
